@@ -33,7 +33,7 @@ const compiler = webpack(config);
 const server =
   new WebpackDevServer(compiler, {
     hot: true,
-    contentBase: path.join(__dirname, '../build'),
+    contentBase: path.join(__dirname, '../bin'),
     headers: { 'Access-Control-Allow-Origin': '*' },
     // [FS-AFQ][03-MAR-2020][IRAD-884#2]
     // [FS] IRAD-1005 2020-07-07
