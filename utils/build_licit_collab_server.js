@@ -1,5 +1,7 @@
 const webpack = require('webpack');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+// [FS] IRAD-1005 2020-07-07
+// Upgrade outdated packages.
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const FlowWebpackPlugin = require('flow-webpack-plugin');
 const WriteFilePlugin = require('write-file-webpack-plugin');
 const env = require('./env');
@@ -21,8 +23,8 @@ const config = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
-          presets: ['env', 'react', ['es2015', {'modules': false}]],
-          plugins: ['transform-class-properties'],
+          presets: [['@babel/preset-env', { 'targets': { 'node': true } }], '@babel/preset-react'],
+          plugins: ['@babel/plugin-proposal-class-properties'],
         },
       },
       // {
@@ -51,7 +53,7 @@ const config = {
     // }),
     new FlowWebpackPlugin(),
     // clean the web folder
-    new CleanWebpackPlugin(['servers']),
+    new CleanWebpackPlugin(),
     // expose and write the allowed env vars on the compiled bundle
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(env.NODE_ENV)

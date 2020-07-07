@@ -5,7 +5,9 @@ const WebpackDevServer = require('webpack-dev-server'),
     path = require('path'),
     formidable = require('formidable'),
     mv = require('mv'),
-    uuidv4 = require('uuid/v4'),
+    // [FS] IRAD-1005 2020-07-07
+    // Upgrade outdated packages.
+    uuidv4 = require('uuid').v4,
     express = require('express');
 
 const options = (config.chromeExtensionBoilerplate || {});
@@ -34,7 +36,9 @@ const server =
     contentBase: path.join(__dirname, '../build'),
     headers: { 'Access-Control-Allow-Origin': '*' },
     // [FS-AFQ][03-MAR-2020][IRAD-884#2]
-    setup: function(app, server) {
+    // [FS] IRAD-1005 2020-07-07
+    // Upgrade outdated packages. setup -> before    
+    before: function(app, server) {
       // Handle asset GET url.
       app.use('/assets', express.static('../images/'));
       // Handle image upload.

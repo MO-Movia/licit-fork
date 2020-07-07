@@ -1,6 +1,6 @@
 // @flow
 
-import {EditorState, Plugin} from 'prosemirror-state';
+import {EditorState, Plugin, PluginKey} from 'prosemirror-state';
 import {TextSelection} from 'prosemirror-state';
 import {EditorView} from 'prosemirror-view';
 
@@ -21,6 +21,9 @@ import './ui/czi-pop-up.css';
 
 // https://prosemirror.net/examples/tooltip/
 const SPEC = {
+  // [FS] IRAD-1005 2020-07-07
+  // Upgrade outdated packages.
+  key: new PluginKey('LinkTooltipPlugin'),
   view(editorView: EditorView) {
     return new LinkTooltipView(editorView);
   },
