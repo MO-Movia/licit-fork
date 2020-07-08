@@ -142,7 +142,7 @@ Please refer *licit\client\index.js* for getting more detailed idea on passing p
 | data |Document data to be loaded into the editor|null
 | disabled|To disable the editor|false
 | embedded|To disable/enable inline behavior of the editor|false
-
+| runtime|To pass runtime to the editor. No value means default EditorRuntime 
 
 |Event Name| Description|Parameter| 
 |--|--|--|
