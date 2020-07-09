@@ -23,34 +23,13 @@ const config = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
-          presets: [['@babel/preset-env', { 'targets': { 'node': true } }], '@babel/preset-react'],
+          presets: [['@babel/preset-env', { 'targets': { 'esmodules': true } }], '@babel/preset-react'],
           plugins: ['@babel/plugin-proposal-class-properties'],
         },
       },
-      // {
-      //   test: /\.css$/,
-      //   exclude:/ui/
-      // },
-      // {
-      //   test: /\.html$/,
-      //   loader: "html-loader",
-      //   exclude: /node_modules/
-      // },
-      // {
-      //   test: /mathquill\.js$/,
-      //   include: [/node-mathquill/],
-      //   // Grab the MathQuill export
-      //   // NOTE: window.jQuery needs to be provided through the providePlugin
-      //   // unless https://github.com/webpack/imports-loader/pull/21 is merged
-      //   use: ['exports-loader?MathQuill'],
-      // },
     ],
   },
   plugins: [
-    // new webpack.ProvidePlugin({
-    //   // jQuery (for Mathquill)
-    //   'window.jQuery': 'jquery',
-    // }),
     new FlowWebpackPlugin(),
     // clean the web folder
     new CleanWebpackPlugin(),

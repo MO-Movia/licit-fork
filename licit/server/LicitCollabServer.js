@@ -3,7 +3,9 @@
 import url from 'url';
 // [FS][07-Jul-2020][IRAD-1004]
 const formidable = require('formidable');
-const uuidv4 = require('uuid/v4');
+// [FS] IRAD-1005 2020-07-07
+// Upgrade outdated packages.
+const uuidv4 = require('uuid').v4;
 const mv = require('mv');
 
 import LicitCollabController from './LicitCollabController';
@@ -42,7 +44,7 @@ class LicitCollabServer {
       request.on('data', function (chunk) {
         body += chunk.toString();
       });
-	// [FS][07-Jul-2020][IRAD-1004]
+      // [FS][07-Jul-2020][IRAD-1004]
       const se = /^\/saveimage/;
       if (se.test(path)) {
 
