@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Licit from '../../src/client/Licit';
-import LicitRuntimeExt from './LicitRuntimeExt';
+import CustomLicitRuntime from './CustomLicitRuntime';
 
 function main(): void {
   const el = document.createElement('div');
@@ -20,8 +20,8 @@ function main(): void {
 
   // To pass runtime to handle the upload image from angular App
   // null means it will take licit EditorRuntime
-  const runTime = new LicitRuntimeExt();  
-  ReactDOM.render(<Licit data={docJSON} debug={false} docID={1} embedded={false} height={'100vh'} onChange={onChangeCB} onReady={onReadyCB}  runtime={runTime} width={'100vw'}/>, el);
+  const runTime = new CustomLicitRuntime();  
+  ReactDOM.render(<Licit docID={0} debug={false} width={'100vw'} height={'100vh'} onChange={onChangeCB} onReady={onReadyCB} data={docJSON} embedded={false} runtime={runTime} />, el);
 }
 
 function onChangeCB(data) {

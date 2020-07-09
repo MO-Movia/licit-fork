@@ -5,7 +5,7 @@
 import type {ImageLike} from '../../src/Types';
 import { GET, POST } from '../../src/client/http';
 
-class LicitRuntimeExt{
+class CustomLicitRuntime {
 
   // Image Proxy
   canProxyImageSrc(): boolean {
@@ -45,4 +45,4 @@ class LicitRuntimeExt{
   }
 }
 
-export default LicitRuntimeExt;
+export default CustomLicitRuntime;

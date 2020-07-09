@@ -23,7 +23,8 @@
       "@babel/plugin-transform-runtime",
       {
         "helpers": false,
-        "regenerator": true
+        "regenerator": true,
+        "absoluteRuntime": "babel-runtime"
       }
     ],
     "@babel/plugin-syntax-dynamic-import",

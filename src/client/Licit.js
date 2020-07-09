@@ -42,8 +42,6 @@ class Licit extends React.Component<any, any, any> {
   constructor(props: any, context: any) {
     super(props, context);
 
-
-    //this._runtime = props.runtime ? props.runtime : new LicitRuntime();
     this._clientID = uuid();
     this._editorView = null;
     this._skipSCU = true;
@@ -144,13 +142,12 @@ class Licit extends React.Component<any, any, any> {
   }
 
   render(): React.Element<any> {
-    const { editorState, width, height, readOnly, disabled, embedded,runtime } = this.state;
+    const { editorState, width, height, readOnly, disabled, embedded, runtime } = this.state;
     // [FS] IRAD-978 2020-06-05
     // Using 100vw & 100vh (100% viewport) is not ideal for a component which is expected to be a part of a page,
     // so changing it to 100%  width & height which will occupy the area relative to its parent.
     return (
       <RichTextEditor
-        disabled={disabled}
         editorState={editorState}
         embedded={embedded}
         height={height}
@@ -159,7 +156,7 @@ class Licit extends React.Component<any, any, any> {
         readOnly={readOnly}
         runtime={runtime}
         width={width}
-
+        disabled={disabled}
       />
     );
   }
@@ -214,7 +211,7 @@ class Licit extends React.Component<any, any, any> {
     if (this.state.readOnly) {
       // It should be possible to load content into the editor in readonly as well.
       // It should not be necessary to make the component writable any time during the process
-      const propsCopy = {};
+      let propsCopy = {};
       this._skipSCU = true;
       Object.assign(propsCopy, props);
       // make writable without content change

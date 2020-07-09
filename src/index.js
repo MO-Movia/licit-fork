@@ -10,6 +10,5 @@ export {default as isEditorStateEmpty} from './isEditorStateEmpty';
 export {default as uuid} from './ui/uuid';
 // [FS] IRAD-978 2020-06-05
 // Export Licit as a component
-export { default as Licit } from './client/Licit.js';
-export { default as EditorRuntime } from './Types';
-export { default as ImageLike } from  './Types';
+export {default as Licit} from './client/Licit.js';
+export {ImageLike,EditorRuntime} from  './Types';

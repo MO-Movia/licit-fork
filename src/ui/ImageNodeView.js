@@ -3,6 +3,7 @@
 import cx from 'classnames';
 import { Node } from 'prosemirror-model';
 import { Decoration } from 'prosemirror-view';
+import { NodeSelection } from 'prosemirror-state';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -317,7 +318,14 @@ class ImageViewBody extends React.PureComponent<any, any, any> {
     let tr = editorView.state.tr;
     const { selection } = editorView.state;
     tr = tr.setNodeMarkup(pos, null, attrs);
-    tr = tr.setSelection(selection);
+    // [FS] IRAD-1005 2020-07-09
+    // Upgrade outdated packages.
+    // reset selection to original using the latest doc.
+    const origSelection = NodeSelection.create(
+      tr.doc,
+      selection.from
+    );
+    tr = tr.setSelection(origSelection);
     editorView.dispatch(tr);
   };
 
@@ -337,7 +345,14 @@ class ImageViewBody extends React.PureComponent<any, any, any> {
     let tr = editorView.state.tr;
     const { selection } = editorView.state;
     tr = tr.setNodeMarkup(pos, null, attrs);
-    tr = tr.setSelection(selection);
+    // [FS] IRAD-1005 2020-07-09
+    // Upgrade outdated packages.
+    // reset selection to original using the latest doc.
+    const origSelection = NodeSelection.create(
+      tr.doc,
+      selection.from
+    );
+    tr = tr.setSelection(origSelection);
     editorView.dispatch(tr);
   };
 
