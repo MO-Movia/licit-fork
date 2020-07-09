@@ -12,3 +12,4 @@ export {default as uuid} from './ui/uuid';
 // Export Licit as a component
 export { default as Licit } from './client/Licit.js';
 export { default as EditorRuntime } from './Types';
+export { default as ImageLike } from  './Types';

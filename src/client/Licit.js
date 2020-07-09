@@ -13,6 +13,7 @@ import LicitRuntime from './LicitRuntime';
 import SimpleConnector from './SimpleConnector';
 import CollabConnector from './CollabConnector';
 import { EMPTY_DOC_JSON } from '../createEmptyEditorState';
+import {EditorRuntime} from '../Types'
 
 import './licit.css';
 
@@ -32,7 +33,7 @@ import './licit.css';
  *  embedded {boolean} [false] Disable/Enable inline behaviour.
  */
 class Licit extends React.Component<any, any, any> {
-  _runtime: any;
+  _runtime:  EditorRuntime;
   _connector: any;
   _clientID: string;
   _editorView: EditorView; // This will be handy in updating document's content.
