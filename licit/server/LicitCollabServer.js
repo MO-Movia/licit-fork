@@ -1,6 +1,10 @@
 // @flow
 
 import url from 'url';
+// [FS][07-Jul-2020][IRAD-1004]
+const formidable = require('formidable');
+const uuidv4 = require('uuid/v4');
+const mv = require('mv');
 
 import LicitCollabController from './LicitCollabController';
 
@@ -30,19 +34,54 @@ class LicitCollabServer {
           'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept',
       };
       response.writeHead(200, headers);
+    if (method === 'OPTIONS') {
+
       response.end();
     } else if (method === 'POST') {
       let body = '';
-      request.on('data', function(chunk) {
+      request.on('data', function (chunk) {
         body += chunk.toString();
       });
-      request.on('end', function() {
-        // assume data is posted as `application/json`.
-        request.params = JSON.parse(String(body));
-        log(body);
-        log(request.params);
-        handleServerRequest(this, request, response);
-        body = null;
+	// [FS][07-Jul-2020][IRAD-1004]
+      const se = /^\/saveimage/;
+      if (se.test(path)) {
+
+        const form = new formidable.IncomingForm();
+        const fileid = uuidv4();
+        const query = parsed.query;
+        log(query);
+        const filename = fileid + '_' + query['fn'];
+        form.parse(request, function (err, fields, blob) {
+          const oldpath = blob.file.path;
+          let respdata;
+          // const newpath = __dirname + '/images/' + filename;
+          const newpath =  '/var/www/html/licit/assets/' + filename;
+
+          log(filename);
+          mv(oldpath, newpath, function (err) {
+            if (err) {
+              response.data.json({ 'error': err });
+            } else {
+                            respdata = {
+                id: fileid,
+                width: 0,
+                height: 0,
+                src: '/assets/' + filename,
+              };
+            }
+            response.end(JSON.stringify(respdata));
+          });
+        });
+      }
+
+      request.on('end', function () {
+          // assume data is posted as `application/json`.
+          request.params = JSON.parse(String(body));
+          // log(body);
+          log(request.params);
+          handleServerRequest(this, request, response);
+          body = null;
+
       }.bind(this));
     } else {
       request.params = normalizeParams(parsed.query);
