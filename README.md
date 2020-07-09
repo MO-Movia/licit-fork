@@ -143,7 +143,7 @@ Please refer *licit\client\index.js* for getting more detailed idea on passing p
 | data |Document data to be loaded into the editor|null
 | disabled|To disable the editor|false
 | embedded|To disable/enable inline behavior of the editor|false
-| runtime|To pass runtime to the editor. No value means default EditorRuntime | Expects a post method *saveimage* in the server with input as a *File* object format and output is in JSON format (*{id: string, height: number, src: string, width: number}*)
+| runtime|To pass runtime to the editor. No value means default EditorRuntime | Expects a post method *'saveimage?fn='* in the server with input as a *File* object format and output is in JSON format (*{id: string, height: number, src: string, width: number}*)
 
 |Event Name| Description|Parameter| 
 |--|--|--|
