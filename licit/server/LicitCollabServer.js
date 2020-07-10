@@ -36,8 +36,6 @@ class LicitCollabServer {
           'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept',
       };
       response.writeHead(200, headers);
-    if (method === 'OPTIONS') {
-
       response.end();
     } else if (method === 'POST') {
       let body = '';

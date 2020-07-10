@@ -8,6 +8,7 @@ const env = require('./env');
 const path = require('path');
 
 const config = {
+  mode: 'development',//production
   entry: {
     run_licit_collab_server: path.join(__dirname, '../licit', 'server', 'runLicitCollabServer.js'),
   },
@@ -37,11 +38,10 @@ const config = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(env.NODE_ENV)
     }),
-  //  new HtmlWebpackInlineSourcePlugin(),
     new WriteFilePlugin(),
   ],
   // to enable debug
-  devtool: 'source-map'
+  //devtool: 'source-map'
 };
 
 webpack(
