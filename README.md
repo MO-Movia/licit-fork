@@ -10,6 +10,9 @@
 
 
 
+
+
+
 <h1 align="center">Licit Editor</h1>
 
 <div align="center">
@@ -66,10 +69,18 @@ In order to upload image work correctly, "images" folder is expected outside the
 ### Start the collaboration server
 ```
 In Windows
-py run_collab_server.py  
+To build collab server:
+py build_collab_server.py
+
+To run collab server:
+py run_collab_server.py 
 
 In MacOS/Linux
-python run_collab_server.py
+To build collab server:
+python build_collab_server.py
+
+To run collab server:
+python run_collab_server.py 
 ```  
 
 ### Start the web server
