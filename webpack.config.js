@@ -81,12 +81,6 @@ var options = {
   resolve: {
     alias: {}
   },
-// [FS] IRAD-1005 2020-07-10
-// Upgrade outdated packages.
-  optimization: {
-    minimize: true,
-    minimizer: [new TerserPlugin()],
-  },
   plugins: [
     new webpack.ProvidePlugin({
       // jQuery (for Mathquill)
@@ -112,8 +106,13 @@ var options = {
 
 if (env.NODE_ENV === 'development') {
   options.devtool = 'cheap-module-eval-source-map';
-} else {  
-  
+} else {
+// [FS] IRAD-1005 2020-07-10
+// Upgrade outdated packages.  
+  options.optimization =  {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  }
 }
 
 module.exports = options;
