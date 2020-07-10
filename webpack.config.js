@@ -5,7 +5,8 @@ var webpack = require('webpack'),
   FlowWebpackPlugin = require('flow-webpack-plugin'),
   HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
-  UglifyJsPlugin = require('uglifyjs-webpack-plugin'),
+  TerserPlugin = require('terser-webpack-plugin'),
+  
   WriteFilePlugin = require('write-file-webpack-plugin'),
   env = require('./utils/env'),
   fileSystem = require('fs'),
@@ -19,7 +20,7 @@ var isDev = env.NODE_ENV === 'development' || 0;
 // isDev = false;
 
 var options = {
-  mode: 'development',//production
+  mode: 'production',
   entry: {
     licit: path.join(__dirname, 'licit', 'client', 'index.js'),
   },
@@ -80,6 +81,12 @@ var options = {
   resolve: {
     alias: {}
   },
+// [FS] IRAD-1005 2020-07-10
+// Upgrade outdated packages.
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  },
   plugins: [
     new webpack.ProvidePlugin({
       // jQuery (for Mathquill)
@@ -105,8 +112,8 @@ var options = {
 
 if (env.NODE_ENV === 'development') {
   options.devtool = 'cheap-module-eval-source-map';
-} else {
-  options.plugins.push(new UglifyJsPlugin());
+} else {  
+  
 }
 
 module.exports = options;
