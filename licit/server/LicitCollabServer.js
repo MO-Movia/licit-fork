@@ -1,7 +1,7 @@
 // @flow
 
 import url from 'url';
-// [FS][07-Jul-2020][IRAD-1004]
+// [FS] IRAD-1004 2020-07-07
 const formidable = require('formidable');
 // [FS] IRAD-1005 2020-07-07
 // Upgrade outdated packages.
@@ -42,7 +42,8 @@ class LicitCollabServer {
       request.on('data', function (chunk) {
         body += chunk.toString();
       });
-      // [FS][07-Jul-2020][IRAD-1004]
+      // [FS] IRAD-1004 2020-07-07
+      // Image upload
       const se = /^\/saveimage/;
       if (se.test(path)) {
 
