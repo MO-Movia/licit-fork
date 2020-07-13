@@ -12,6 +12,12 @@ const config = {
   entry: {
     run_licit_collab_server: path.join(__dirname, '../licit', 'server', 'runLicitCollabServer.js'),
   },
+  // [FS] 2020-07-13  
+  externals: [
+    {
+        formidable: 'commonjs formidable',
+    }
+],
   target: 'node',
   output: {
     path: path.join(__dirname, '../servers'),
@@ -31,7 +37,7 @@ const config = {
     ],
   },
   plugins: [
-    new FlowWebpackPlugin(),
+    // new FlowWebpackPlugin(),
     // clean the web folder
     new CleanWebpackPlugin(),
     // expose and write the allowed env vars on the compiled bundle
