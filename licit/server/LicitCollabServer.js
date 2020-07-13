@@ -22,20 +22,19 @@ class LicitCollabServer {
     const path = parsed.pathname || '';
     const method = request.method.toUpperCase();
     request.path = path;
-    log({method, path});
-
-    if (method === 'OPTIONS') {
+    log({ method, path });
       // For X-Domain Preflught Request
       // https://gist.github.com/nilcolor/816580
-      const headers = {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': ';POST, GET, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Credential': false,
-        'Access-Control-Max-Age': 86400, // 24hrs
-        'Access-Control-Allow-Headers':
-          'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept',
-      };
-      response.writeHead(200, headers);
+    const headers = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': ';POST, GET, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Credential': false,
+      'Access-Control-Max-Age': 86400, // 24hrs
+      'Access-Control-Allow-Headers':
+      'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept',
+    };
+    response.writeHead(200, headers);
+    if (method === 'OPTIONS') {
       response.end();
     } else if (method === 'POST') {
       let body = '';
