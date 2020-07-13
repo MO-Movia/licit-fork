@@ -56,7 +56,7 @@ class LicitCollabServer {
           const oldpath = blob.file.path;
           let respdata;
           // const newpath = __dirname + '/images/' + filename;
-          const newpath =  '/var/www/html/licit/assets/' + filename;
+          const newpath =  '/opt/tomcat/webapps/licit/assets/' + filename;
 
           log(filename);
           mv(oldpath, newpath, function (err) {
