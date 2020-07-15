@@ -89,7 +89,7 @@
     "prosemirror-keymap": "^1.1.4",
     "prosemirror-model": "1.10.0",
     "prosemirror-state": "1.3.3",
-    "prosemirror-tables": "github:chanzuckerberg/prosemirror-tables#0c4dd66a50da42f10bc53f1cc9d2236b2be18925",
+    "prosemirror-tables": "github:ProseMirror/prosemirror-tables",
     "prosemirror-transform": "1.2.6",
     "prosemirror-utils": "0.9.6",
     "prosemirror-view": "1.15.0",
