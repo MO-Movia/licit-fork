@@ -9,8 +9,8 @@ const path = require('path');
 
 const config = {
   mode: 'development',//production
-  entry: {
-    run_licit_collab_server: path.join(__dirname, '../licit', 'server', 'runLicitCollabServer.js'),
+  entry: {// [FS] IRAD-901 2020-07-15 New collab server reusing base PM collab server  
+    run_licit_collab_server: path.join(__dirname, '../licit', 'server/collab', 'start.js'),
   },
   target: 'node',
   output: {
@@ -31,7 +31,6 @@ const config = {
     ],
   },
   plugins: [
-    //new FlowWebpackPlugin(),
     // [FS] 2020-07-13
     // To take care of formidable.
     new webpack.DefinePlugin({ "global.GENTLY": false }),
