@@ -34,14 +34,15 @@ const server =
   new WebpackDevServer(compiler, {
     hot: true,
     contentBase: path.join(__dirname, '../servers/image'),
-    headers: {  'Access-Control-Allow-Origin': '*' },      
+    headers: {
+        'Access-Control-Allow-Headers': 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept',
+        'Access-Control-Allow-Origin': '*'
+    },
     before: function(app, server) {
       // Handle asset GET url.
       app.use('/assets', express.static('../images/'));
       // Handle image upload.
       app.post('/saveimage', function(req, res) {
-       // console.log("save image entered!!!!!!!!!!!!!!!!!!!!!");
-        res.writeHead(200, {'Access-Control-Allow-Origin': '*'});
         const form = new formidable.IncomingForm();
         form.parse(req, function (err, fields, blob) {
           const oldpath = blob.file.path;
@@ -50,14 +51,19 @@ const server =
           const newpath = '../images/' + filename;
           mv(oldpath, newpath, function (err) {
             if (err) {
+              res.writeHead(500, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
               res.json({'error': err});
             } else {
-              res.json({
+              const host = req.headers['host'];
+              const proto = req.connection.encrypted ? 'https' : 'http';
+              const imgSrc = proto + '://' + host + '/assets/' + filename;
+              res.writeHead(200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
+              res.write(JSON.stringify({
                 id: fileid,
                 width: 0,
                 height: 0,
-                src: '/assets/' + filename,
-              });
+                src: imgSrc,
+              }));
             }
             res.end();
           });
