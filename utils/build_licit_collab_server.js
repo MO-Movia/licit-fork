@@ -14,7 +14,7 @@ const config = {
   },
   target: 'node',
   output: {
-    path: path.join(__dirname, '../servers'),
+    path: path.join(__dirname, '../servers/collab'),
     filename: '[name].bundle.js'
   },
   module: {
