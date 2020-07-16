@@ -26,7 +26,7 @@ class CustomLicitRuntime {
   uploadImage(blob: Object): Promise<ImageLike> {  
     // Use uploaded image URL.
     var img: ImageLike;
-    POST('http://localhost:3004/saveimage?fn='+blob.name, blob, 'application/octet-stream').then(data => {
+    POST(window.location.hostname + ':3004/saveimage?fn='+blob.name, blob, 'application/octet-stream').then(data => {
       img = JSON.parse(data);
     }, err => {
       img = {
