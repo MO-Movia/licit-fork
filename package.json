@@ -71,6 +71,7 @@
     "browserkeymap": "2.0.2",
     "classnames": "2.2.6",
     "color": "3.1.2",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "formidable": "^1.2.2",
     "invariant": "2.2.4",
