@@ -29,6 +29,8 @@ const config = {
     ],
   },
   plugins: [
+    // type checker 
+    new FlowWebpackPlugin(),
     // To take care of formidable.
     new webpack.DefinePlugin({ "global.GENTLY": false }),
     // clean the web folder

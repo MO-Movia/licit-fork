@@ -1,3 +1,5 @@
+// @flow
+
 const {readFileSync, writeFile} = require("fs")
 
 import EditorSchema from "../../../src/EditorSchema"

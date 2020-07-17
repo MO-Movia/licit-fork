@@ -1,3 +1,5 @@
+// @flow
+
 import {parse} from "url"
 
 // A URL router for the server.

@@ -1,3 +1,5 @@
+// @flow
+
 import {createServer} from 'http';
 import handleCollabRequest from './server';
 

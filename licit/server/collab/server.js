@@ -1,3 +1,5 @@
+// @flow
+
 import {Step} from "prosemirror-transform"
 
 import Router from "./route"
