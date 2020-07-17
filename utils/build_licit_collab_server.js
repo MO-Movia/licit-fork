@@ -32,7 +32,7 @@ const config = {
   },
   plugins: [
     // type checker
-    new FlowWebpackPlugin(),
+    ... (env.NODE_ENV === 'development') ? [new FlowWebpackPlugin()] : [],
     // [FS] 2020-07-13
     // To take care of formidable.
     new webpack.DefinePlugin({ "global.GENTLY": false }),

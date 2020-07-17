@@ -30,7 +30,7 @@ const config = {
   },
   plugins: [
     // type checker 
-    new FlowWebpackPlugin(),
+    ... (env.NODE_ENV === 'development') ? [new FlowWebpackPlugin()] : [],
     // To take care of formidable.
     new webpack.DefinePlugin({ "global.GENTLY": false }),
     // clean the web folder
