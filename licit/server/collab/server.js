@@ -10,19 +10,20 @@ import { getInstance, instanceInfo } from "./instance"
 import SetDocAttrStep from "../../../src/SetDocAttrStep";
 
 const router = new Router();
-
+let effectiveSchema = EditorSchema;
 function handleCollabRequest(req: any, resp: any) {
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': ';POST, GET, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Credential': false,
+    'Access-Control-Max-Age': 86400, // 24hrs
+    'Access-Control-Allow-Headers':
+      'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept'
+  };
   if (!router.resolve(req, resp)) {
     const method = req.method.toUpperCase();
     if (method === 'OPTIONS') {
-      const headers = {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': ';POST, GET, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Credential': false,
-        'Access-Control-Max-Age': 86400, // 24hrs
-        'Access-Control-Allow-Headers':
-          'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept'
-      };
+
       resp.writeHead(200, headers);
       resp.end();
     } else {
@@ -209,10 +210,16 @@ function reqIP(request) {
 // The event submission endpoint, which a client sends an event to.
 handle("POST", ["docs", null, "events"], (data, id, req) => {
   let version = nonNegInteger(data.version)
-  let steps = data.steps.map(s => Step.fromJSON(EditorSchema, s))
+  let steps = data.steps.map(s => Step.fromJSON(effectiveSchema, s))
   let result = getInstance(id, reqIP(req)).addEvents(version, steps, data.clientID)
   if (!result)
     return new Output(409, "Version not current")
   else
     return Output.json(result)
+})
+// FS IRAD-1040 2020-26-08
+// set the effective schema from client to work the plugins collaboratively
+handle("POST", ["docs", null, "schema"], (data, id, req) => {
+ // effectiveSchema = data.schema;
+  return Output.json({ result: 'success' });
 })

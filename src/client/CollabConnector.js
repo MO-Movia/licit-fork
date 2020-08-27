@@ -57,6 +57,11 @@ class CollabConnector extends SimpleConnector {
       this._connection.dispatch({ type: 'transaction', transaction });
     });
   };
+  // FS IRAD-1040 2020-26-08
+  // Send the modified schema to server
+  updateSchema = (schema) => {
+    this._connection.sendSchema(schema);
+  };
 }
 
 export default CollabConnector;
