@@ -91,7 +91,9 @@ class Licit extends React.Component<any, any> {
     };
     // FS IRAD-1040 2020-26-08
     // Get the modified schema from editorstate and send it to collab server
-    this._connector.updateSchema(this.state.editorState.schema);
+    if (this._connector.updateSchema) {
+      this._connector.updateSchema(this.state.editorState.schema);
+    }
   }
 
   setContent = (content: any = {}): void => {
