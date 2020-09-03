@@ -13,6 +13,9 @@ import EditorPlugins from '../EditorPlugins';
 import EditorSchema from '../EditorSchema';
 import uuid from '../uuid';
 import { GET, POST } from './http';
+// [FS] IRAD-1040 2020-09-02
+import { Schema } from 'prosemirror-model';
+import { stringify } from 'flatted';
 
 function badVersion(err: Object) {
   return err.status == 400 && /invalid version/i.test(String(err));
@@ -223,18 +226,14 @@ class EditorConnection {
     );
   }
 
-  // FS IRAD-1040 2020-26-08
+  // [FS] IRAD-1040 2020-09-02
   // Send the modified schema to server
-  sendSchema(schema) {
-    const json = JSON.stringify({
-      schema: schema
-    });
-    const headers = {
-      'Content-Type': 'application/json'
-    };
-    this.run(POST(this.url + '/schema/', json, { headers })).then(
+  updateSchema(schema: Schema) {
+	// to avoid cyclic reference error, use flatted string.
+	const schemaFlatted = stringify(schema);	
+    this.run(POST(this.url + '/schema/', schemaFlatted, 'text/plain')).then(
       data => {
-        console.log('schema updated')
+        console.log('schema updated');
       },
       err => {
         this.report.failure(err);
