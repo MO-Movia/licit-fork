@@ -75,11 +75,11 @@ class Licit extends React.Component<any, any> {
     const runtime = props.runtime ? props.runtime : new LicitRuntime();
     const plugins = props.plugins || null;
     let editorState = convertFromJSON(data, null, plugins);
-    //[FS] IRAD-1067 2020-09-19
-    //The editorState will return null if the doc Json is mal-formed
+    // [FS] IRAD-1067 2020-09-19
+    // The editorState will return null if the doc Json is mal-formed
     if (null === editorState) {
       editorState = convertFromJSON(EMPTY_DOC_JSON, null, plugins);
-      this.showAlert()
+      this.showAlert();
     }
 
     const setState = this.setState.bind(this);
@@ -109,10 +109,10 @@ class Licit extends React.Component<any, any> {
     if (this._connector.updateSchema) {
       this._connector.updateSchema(this.state.editorState.schema);
     }
-
   }
- //[FS] IRAD-1067 2020-09-19
- //Alert funtion to show document is corrupted
+  
+  // [FS] IRAD-1067 2020-09-19
+  // Alert funtion to show document is corrupted
   showAlert() {
     const anchor =  null;
     this._popUp = createPopUp(AlertInfo, null, {
@@ -121,7 +121,6 @@ class Licit extends React.Component<any, any> {
       onClose: val => {
         if (this._popUp) {
           this._popUp = null;
-         
         }
       },
     });

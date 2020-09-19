@@ -42,8 +42,9 @@ export default function convertFromJSON(
     console.error('convertFromJSON: invalid object', json);
     return createEmptyEditorState(schema, plugins);
   }
-   //[FS] IRAD-1067 2020-09-19
-   //throws error on invalid json
+
+  // [FS] IRAD-1067 2020-09-19
+  // Handle gracefully when error thrown on invalid json
   let doc = null;
   
   try {
@@ -51,6 +52,7 @@ export default function convertFromJSON(
   } catch (error) {
     return null;
   }
+
   return EditorState.create({
     doc: doc,
     schema: editorSchema,
